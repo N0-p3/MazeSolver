@@ -31,6 +31,8 @@ public:
 		switch (myStack.top()->getDirectionCount()) {
 			case 0:
 				// TODO : pop until multiple choice
+				while(!(myStack.top()->getDirectionCount()))
+					myStack.pop();
 			break;
 			case 1:
 				// TODO : fucking go
@@ -46,17 +48,33 @@ public:
 			break;
 		}
 		switch (dir) {
+			// mettre direction que je vais emprunter a faux
+			// se deplacer (nouvelle instance et empiler)
+			// determiner les direction possible
+			// mettre a faux d'ou je viens
 			case Position::NORTH:
-			// TODO : mettre direction que je vais emprunter a faux
-			//				se deplacer (nouvelle instance et empiler)
-			//				determiner les direction possible
-			//				mettre a faux d'ou je viens
+				myStack.top()->directions[Position::NORTH] == false;
+				myStack.push(new Position(myStack.top()->x, myStack.top()->y - 1));
+				setDirections();
+				myStack.top()->directions[Position::SOUTH] = false;
 			break;
 			case Position::EAST:
+				myStack.top()->directions[Position::EAST] == false;
+				myStack.push(new Position(myStack.top()->x + 1, myStack.top()->y));
+				setDirections();
+				myStack.top()->directions[Position::WEST] = false;
 			break;
 			case Position::SOUTH:
+				myStack.top()->directions[Position::SOUTH] == false;
+				myStack.push(new Position(myStack.top()->x , myStack.top()->y + 1));
+				setDirections();
+				myStack.top()->directions[Position::NORTH] = false;
 			break;
 			case Position::WEST:
+				myStack.top()->directions[Position::WEST] == false;
+				myStack.push(new Position(myStack.top()->x - 1, myStack.top()->y));
+				setDirections();
+				myStack.top()->directions[Position::EAST] = false;
 			break;
 		}
 	}
