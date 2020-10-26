@@ -26,18 +26,37 @@ public:
 	}
 
 	void onUpdate() {
+		int dir = -1;
 		// TODO : Avancer d'un pas.
-		switch (getDirectionCount) {
+		switch (myStack.top()->getDirectionCount()) {
 			case 0:
 				// TODO : pop until multiple choice
 			break;
 			case 1:
 				// TODO : fucking go
+				for (int i = 0; i < 4; i++)
+					if (myStack.top()->directions[i] == true)
+						dir = i;
 			break;
 			case 2:
 			case 3:
 			case 4:
 				// TODO : choose a random path and fucking go
+				// 				Affecter dir a random
+			break;
+		}
+		switch (dir) {
+			case Position::NORTH:
+			// TODO : mettre direction que je vais emprunter a faux
+			//				se deplacer (nouvelle instance et empiler)
+			//				determiner les direction possible
+			//				mettre a faux d'ou je viens
+			break;
+			case Position::EAST:
+			break;
+			case Position::SOUTH:
+			break;
+			case Position::WEST:
 			break;
 		}
 	}
