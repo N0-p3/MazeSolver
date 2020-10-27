@@ -1,3 +1,4 @@
+#include <time.h>
 #include "./Window.hpp"
 #include "./DynamicStack.hpp"
 #include "./Position.hpp"
@@ -11,6 +12,7 @@ private:
 public:
 	MazeSolver(Maze* maze) {
 		this->maze = maze;
+		srand(time(NULL));
 		// TODO : Instanciations.
 		for (int x = 0; x < 53; x++)
 			for (int y = 0; y < 53; y++)
@@ -31,7 +33,6 @@ public:
 		switch (myStack.top()->getDirectionCount()) {
 			case 0:
 				// TODO : pop until multiple choice
-				while(!(myStack.top()->getDirectionCount()))
 					myStack.pop();
 			break;
 			case 1:
@@ -45,33 +46,34 @@ public:
 			case 4:
 				// TODO : choose a random path and fucking go
 				// 				Affecter dir a random
+				dir = rand() % 4;
 			break;
 		}
 		switch (dir) {
 			// mettre direction que je vais emprunter a faux
 			// se deplacer (nouvelle instance et empiler)
-			// determiner les direction possible
+			// determiner les directions possible
 			// mettre a faux d'ou je viens
 			case Position::NORTH:
-				myStack.top()->directions[Position::NORTH] == false;
+				myStack.top()->directions[Position::NORTH] = false;
 				myStack.push(new Position(myStack.top()->x, myStack.top()->y - 1));
 				setDirections();
 				myStack.top()->directions[Position::SOUTH] = false;
 			break;
 			case Position::EAST:
-				myStack.top()->directions[Position::EAST] == false;
+				myStack.top()->directions[Position::EAST] = false;
 				myStack.push(new Position(myStack.top()->x + 1, myStack.top()->y));
 				setDirections();
 				myStack.top()->directions[Position::WEST] = false;
 			break;
 			case Position::SOUTH:
-				myStack.top()->directions[Position::SOUTH] == false;
-				myStack.push(new Position(myStack.top()->x , myStack.top()->y + 1));
+				myStack.top()->directions[Position::SOUTH] = false;
+				myStack.push(new Position(myStack.top()->x, myStack.top()->y + 1));
 				setDirections();
 				myStack.top()->directions[Position::NORTH] = false;
 			break;
 			case Position::WEST:
-				myStack.top()->directions[Position::WEST] == false;
+				myStack.top()->directions[Position::WEST] = false;
 				myStack.push(new Position(myStack.top()->x - 1, myStack.top()->y));
 				setDirections();
 				myStack.top()->directions[Position::EAST] = false;
