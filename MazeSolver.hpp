@@ -33,6 +33,7 @@ public:
 		switch (myStack.top()->getDirectionCount()) {
 			case 0:
 				// TODO : pop until multiple choice
+				if (maze->getSquare(myStack.top()->x, myStack.top()->y) != Square::EXIT)
 					myStack.pop();
 			break;
 			case 1:
@@ -46,7 +47,8 @@ public:
 			case 4:
 				// TODO : choose a random path and fucking go
 				// 				Affecter dir a random
-				dir = rand() % 4;
+				while (!(myStack.top()->directions[dir]))
+					dir = rand() % 4;
 			break;
 		}
 		switch (dir) {
